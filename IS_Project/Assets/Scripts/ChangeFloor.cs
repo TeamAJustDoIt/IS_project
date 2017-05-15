@@ -4,9 +4,9 @@ using System.Collections;
 
 public class ChangeFloor : MonoBehaviour {
 
-    public GameObject floor1;
-    public GameObject floor2;
-    public GameObject floor3;
+    public Sprite floor1;
+    public Sprite floor2;
+    public Sprite floor3;
     public Button f1;
     public Button f2;
     public Button f3;
@@ -14,9 +14,12 @@ public class ChangeFloor : MonoBehaviour {
     private Vector3 back = new Vector3(0, 0, 11);
     private Vector3 main = new Vector3(0, 0, 10);
 
+    private Image img;
+
     // Use this for initialization
     void Start()
     {
+        img = GetComponent<Image>();
         Button btn1 = f1.GetComponent<Button>();
         btn1.onClick.AddListener(OnClickFirstFloor);
 
@@ -29,27 +32,30 @@ public class ChangeFloor : MonoBehaviour {
 
     void OnClickFirstFloor()
     {
-        floor1.transform.position = main;
-        floor2.transform.position = back;
-        floor3.transform.position = back;
+        img.sprite = floor1;
+        //floor1.transform.position = main;
+        //floor2.transform.position = back;
+        //floor3.transform.position = back;
 
         Debug.Log("You have clicked 1st floor button!");
     }
 
     void OnClickSecondFloor()
     {
-        floor1.transform.position = back;
-        floor2.transform.position = main;
-        floor3.transform.position = back;
+        img.sprite = floor2;
+        //floor1.transform.position = back;
+        //floor2.transform.position = main;
+        //floor3.transform.position = back;
 
         Debug.Log("You have clicked 2nd floor button!");
     }
 
     void OnClickThirdFloor()
     {
-        floor1.transform.position = back;
-        floor2.transform.position = back;
-        floor3.transform.position = main;
+        img.sprite = floor3;
+        //floor1.transform.position = back;
+        //floor2.transform.position = back;
+        //floor3.transform.position = main;
 
         Debug.Log("You have clicked 3rd floor button!");
     }
