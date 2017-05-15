@@ -33,9 +33,6 @@ public class ChangeFloor : MonoBehaviour {
     void OnClickFirstFloor()
     {
         img.sprite = floor1;
-        //floor1.transform.position = main;
-        //floor2.transform.position = back;
-        //floor3.transform.position = back;
 
         Debug.Log("You have clicked 1st floor button!");
     }
@@ -43,9 +40,6 @@ public class ChangeFloor : MonoBehaviour {
     void OnClickSecondFloor()
     {
         img.sprite = floor2;
-        //floor1.transform.position = back;
-        //floor2.transform.position = main;
-        //floor3.transform.position = back;
 
         Debug.Log("You have clicked 2nd floor button!");
     }
@@ -53,9 +47,6 @@ public class ChangeFloor : MonoBehaviour {
     void OnClickThirdFloor()
     {
         img.sprite = floor3;
-        //floor1.transform.position = back;
-        //floor2.transform.position = back;
-        //floor3.transform.position = main;
 
         Debug.Log("You have clicked 3rd floor button!");
     }
