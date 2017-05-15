@@ -1,12 +1,19 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ChangeFloor.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\WayFinder.cs">
     <Files>
       <File FileName="Assets\Scripts\ChangeFloor.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\WayFinder.cs" Line="63" Column="27" />
+      <File FileName="Assets\Scripts\DrawPoint.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="E:\8semestr\IS\IS_project\IS_Project\Assets\Scripts\WayFinder.cs" line="95" column="1" />
+      <Breakpoint file="E:\8semestr\IS\IS_project\IS_Project\Assets\Scripts\WayFinder.cs" line="135" column="17" />
+      <Breakpoint file="E:\8semestr\IS\IS_project\IS_Project\Assets\Scripts\WayFinder.cs" line="133" column="1" />
+      <Breakpoint file="E:\8semestr\IS\IS_project\IS_Project\Assets\Scripts\WayFinder.cs" line="129" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

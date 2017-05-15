@@ -11,7 +11,10 @@ public class WayFinder : MonoBehaviour {
     public Dropdown dropdownFinish;
     private int sp, ep;
     private ArrayList ways;
+	private ArrayList curway;
     private bool[] visited;
+	public ArrayList neededWay;
+	public bool found = false;
 
     public struct Way{
         public int start;
@@ -37,45 +40,37 @@ public class WayFinder : MonoBehaviour {
             OnYhValueChange(dropdownFinish);
         });
         ways = new ArrayList();
+		curway = new ArrayList();
+		neededWay = new ArrayList ();
 
         ways.Add(new Way(0, 2));
-        ways.Add(new Way(0, 5));
-        ways.Add(new Way(0, 7));
-        ways.Add(new Way(0, 8));
-        ways.Add(new Way(0, 11));
-        ways.Add(new Way(0, 12));
-        ways.Add(new Way(0, 17));
-        ways.Add(new Way(0, 18));
-        ways.Add(new Way(1, 3));
-        ways.Add(new Way(1, 13));
-        ways.Add(new Way(1, 15));
-        ways.Add(new Way(1, 16));
-        ways.Add(new Way(2, 9));
-        ways.Add(new Way(2, 13));
-        ways.Add(new Way(3, 4));
-        ways.Add(new Way(3, 13));
-        ways.Add(new Way(3, 15));
-        ways.Add(new Way(4, 12));
-        ways.Add(new Way(5, 7));
-        ways.Add(new Way(5, 12));
-        ways.Add(new Way(5, 17));
-        ways.Add(new Way(5, 18));
-        ways.Add(new Way(6, 13));       
-        ways.Add(new Way(7, 8));
-        ways.Add(new Way(7, 12));
-        ways.Add(new Way(7, 17));
-        ways.Add(new Way(7, 18));
-        ways.Add(new Way(8, 12));
-        ways.Add(new Way(10, 11));
-        ways.Add(new Way(10, 12));
-        ways.Add(new Way(10, 13));
-        ways.Add(new Way(12, 17));
-        ways.Add(new Way(12, 18));
-        ways.Add(new Way(13, 15));
-        ways.Add(new Way(13, 16));
-        ways.Add(new Way(14, 15));
-        ways.Add(new Way(15, 16));
-        ways.Add(new Way(17, 18));
+		ways.Add(new Way(0, 5));
+		ways.Add(new Way(0, 7));
+		ways.Add(new Way(0, 11));
+		ways.Add(new Way(0, 12));
+		ways.Add(new Way(0, 17));
+		ways.Add(new Way(1, 3));
+		ways.Add(new Way(1, 15));
+		ways.Add(new Way(1, 16));
+		ways.Add(new Way(2, 9));
+		ways.Add(new Way(2, 13));
+		ways.Add(new Way(4, 10));
+		ways.Add(new Way(4, 12));
+		ways.Add(new Way(5, 7));
+		ways.Add(new Way(5, 12));
+		ways.Add(new Way(5, 17));
+		ways.Add(new Way(6, 13));
+		ways.Add(new Way(7, 8));
+		ways.Add(new Way(7, 12));
+		ways.Add(new Way(7, 17));
+		ways.Add(new Way(7, 18));
+		ways.Add(new Way(10, 11));
+		ways.Add(new Way(10, 13));
+		ways.Add(new Way(11, 12));
+		ways.Add(new Way(12, 17));
+		ways.Add(new Way(13, 15));
+		ways.Add(new Way(13, 16));
+		ways.Add(new Way(14, 15));
     }
 
     public void OnMyValueChange(Dropdown dd)
@@ -89,38 +84,55 @@ public class WayFinder : MonoBehaviour {
     }
 
     // Update is called once per frame
-    string SearchWay(int sp, int ep, string curWay)
+	void SearchWay(int sp, int ep, ArrayList curWay)
     {
-        visited[sp] = true;
-        if ((ways.Contains(new Way(sp,ep)))||(ways.Contains(new Way(ep,sp))))
-        {
-            Debug.Log(curWay + "Зашло");
-            return Convert.ToString(ep);
-        }
-        else
-        {
-            foreach (Way i in ways)
-            {
-                if ((i.start == sp)&&(!visited[i.end]))
-                {
-                    Debug.Log(curWay + "Зашло");
-                    return Convert.ToString(sp) + SearchWay(i.end, ep, curWay);
-                    
-                }
-                if ((i.end == sp) && (!visited[i.end]))
-                {
-                    Debug.Log(curWay + "Зашло");
-                    return Convert.ToString(sp) + SearchWay(i.start, ep, curWay);
-                    
-                }
-            }
-        }
-        visited[sp] = false;
-        return curWay;
+
+		if (found)
+			return;
+		
+		foreach (Way way in ways) {
+			if (((way.start == sp) && (way.end == ep)) || ((way.end == sp) && (way.start == ep))) {
+				curWay.Add (ep);
+				foreach (int i in curWay) {
+					neededWay.Add (i);
+				}
+				found = true;
+				return;
+			}
+			if ((way.start == sp)&&(!visited[way.end])&&(!found)) {
+				visited [way.end] = true;
+				curWay.Add (way.end);
+				SearchWay (way.end, ep, curWay);
+				curWay.RemoveAt (curWay.Count - 1);
+				visited [way.end] = false;
+			}
+			else if ((way.end == sp)&&(!visited[way.start])&&(!found)) {
+				visited [way.start] = true;
+				curWay.Add (way.start);
+				SearchWay (way.start, ep, curWay);
+				curWay.RemoveAt (curWay.Count - 1);
+				visited [way.start] = false;
+			}
+		}
+		;
     }
 
     void OnSearchButtonClick ()
     {
-        Debug.Log(SearchWay(sp, ep, ""));
+		curway.Clear();
+		neededWay.Clear ();
+		curway.Add(sp);
+		for (int i = 0; i < 20; i++) {
+			visited [i] = false;
+		}
+		visited [sp] = true;
+		SearchWay (sp, ep, curway);
+		visited [sp] = false;
+		foreach (int i in neededWay)
+		{
+			Debug.Log(i);
+		}
+		found = false;
+		neededWay.Clear ();
 	}
 }
