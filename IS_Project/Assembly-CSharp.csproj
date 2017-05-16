@@ -46,7 +46,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\ChangeFloor.cs" />
      <Compile Include="Assets\Scripts\DrawPoint.cs" />
      <Compile Include="Assets\Scripts\WayFinder.cs" />
  <Reference Include="Facebook.Unity.Settings">

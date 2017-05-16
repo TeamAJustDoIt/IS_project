@@ -15,6 +15,7 @@ public class WayFinder : MonoBehaviour {
     private bool[] visited;
 	public ArrayList neededWay;
 	public bool found = false;
+	public GameObject startImage;
 
     public struct Way{
         public int start;
@@ -117,7 +118,7 @@ public class WayFinder : MonoBehaviour {
 		;
     }
 
-    void OnSearchButtonClick ()
+	void OnSearchButtonClick ()
     {
 		curway.Clear();
 		neededWay.Clear ();
@@ -128,11 +129,9 @@ public class WayFinder : MonoBehaviour {
 		visited [sp] = true;
 		SearchWay (sp, ep, curway);
 		visited [sp] = false;
-		foreach (int i in neededWay)
-		{
-			Debug.Log(i);
-		}
+		int a = Convert.ToInt32(neededWay[0]);
+		GetComponent<DrawPoint> ().currPlace = 0;
+		GetComponent<DrawPoint>().chooseRoom (a, startImage);
 		found = false;
-		neededWay.Clear ();
 	}
 }
